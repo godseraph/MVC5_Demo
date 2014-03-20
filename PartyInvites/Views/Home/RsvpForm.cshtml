@@ -24,7 +24,8 @@
         <div class="form-horizontal">
             <h4>GuestResponse</h4>
             <hr />
-            @Html.ValidationSummary(true)
+            @Html.ValidationSummary(true)  @{//true:不集中显示错误信息
+                                             }
     
             <div class="form-group">
                 @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
