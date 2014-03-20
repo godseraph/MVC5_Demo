@@ -12,6 +12,22 @@
     <title>Thanks</title>
 </head>
 <body>
+    @{
+        try
+        {
+            WebMail.SmtpServer = "smtp.sina.com";
+            WebMail.SmtpPort = 587;
+            WebMail.EnableSsl = true;
+            WebMail.UserName = "godseraph_mvc";
+            WebMail.Password = "mvc12345678";
+            WebMail.From = "godseraph_mvc@sina.com";
+            WebMail.Send("godseraph_mvc@sina.com", "RSVP Notification", Model.Name + " is " + ((Model.WillAttend ?? false) ? "" : "not") + "attending");
+        }
+        catch
+        {
+            @:<b>Sorry 无法发送邮件</b>
+        }
+    }
     <div>
         <h1>Thank you, @Model.Name!</h1>
         @if (Model.WillAttend == true)
