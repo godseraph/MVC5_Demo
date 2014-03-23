@@ -52,17 +52,7 @@
         </script>
         <div class="main-container-inner">
             @{
-                try
-                {
-                    WebMail.SmtpServer = "smtp.sina.com";
-                    WebMail.SmtpPort = 587;
-                    WebMail.EnableSsl = true;
-                    WebMail.UserName = "godseraph_mvc";
-                    WebMail.Password = "mvc12345678";
-                    WebMail.From = "godseraph_mvc@sina.com";
-                    WebMail.Send("godseraph_mvc@sina.com", "RSVP Notification", Model.Name + " is " + ((Model.WillAttend ?? false) ? "" : "not") + "attending");
-                }
-                catch
+                if(!ViewBag.SendState)
                 {
                     @:
                     <div class="alert alert-block alert-danger">
@@ -71,9 +61,21 @@
                         </button>
 
                         <i class="icon-remove green"></i>
-                        Sorry 无法发送邮件
+                        Sorry 无法发送邮件(@ViewBag.SendErrorMsg)
                     </div>
 
+                }
+                else
+                {
+                    @:
+                    <div class="alert alert-block alert-success">
+                        <button type="button" class="close" data-dismiss="alert">
+                            <i class="icon-ok"></i>
+                        </button>
+
+                        <i class="icon-remove green"></i>
+                        成功发送邮件到：@Model.Email ，请查收！
+                    </div>
                 }
             }
             <h1>Thank you, @Model.Name!</h1>
