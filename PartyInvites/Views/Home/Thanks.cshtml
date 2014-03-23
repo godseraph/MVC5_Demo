@@ -8,75 +8,176 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Thanks</title>
+    <meta charset="utf-8" />
+    <title>@ViewBag.title</title>
+
+    <meta name="description" content="RsvpForm" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!--[if IE 7]>
+      <link href="~/Content/css/font-awesome-ie7.min.css" rel="stylesheet" />
+    <![endif]-->
+    <!-- page specific plugin styles -->
+    <!-- fonts -->
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+
+    <!-- ace styles -->
+    <link href="~/Content/css/ace.min.css" rel="stylesheet" />
+    <link href="~/Content/css/ace-rtl.min.css" rel="stylesheet" />
+    <link href="~/Content/css/ace-skins.min.css" rel="stylesheet" />
+    <!--[if lte IE 8]>
+      <link href="~/Content/css/ace-ie.min.css" rel="stylesheet" />
+    <![endif]-->
+    <!-- inline styles related to this page -->
+    <link href="~/Content/css/Site.css" rel="stylesheet" />
+    <!-- ace settings handler -->
+
+    <script src="~/Content/js/ace-extra.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="~/Content/js/html5shiv.js"></script>
+    <script src="~/Content/js/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
-    @{
-        try
-        {
-            WebMail.SmtpServer = "smtp.sina.com";
-            WebMail.SmtpPort = 587;
-            WebMail.EnableSsl = true;
-            WebMail.UserName = "godseraph_mvc";
-            WebMail.Password = "mvc12345678";
-            WebMail.From = "godseraph_mvc@sina.com";
-            WebMail.Send("godseraph_mvc@sina.com", "RSVP Notification", Model.Name + " is " + ((Model.WillAttend ?? false) ? "" : "not") + "attending");
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try { ace.settings.check('main-container', 'fixed') } catch (e) { }
+        </script>
+        <div class="main-container-inner">
+            @{
+                try
+                {
+                    WebMail.SmtpServer = "smtp.sina.com";
+                    WebMail.SmtpPort = 587;
+                    WebMail.EnableSsl = true;
+                    WebMail.UserName = "godseraph_mvc";
+                    WebMail.Password = "mvc12345678";
+                    WebMail.From = "godseraph_mvc@sina.com";
+                    WebMail.Send("godseraph_mvc@sina.com", "RSVP Notification", Model.Name + " is " + ((Model.WillAttend ?? false) ? "" : "not") + "attending");
+                }
+                catch
+                {
+                    @:
+                    <div class="alert alert-block alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">
+                            <i class="icon-remove"></i>
+                        </button>
+
+                        <i class="icon-remove green"></i>
+                        Sorry 无法发送邮件
+                    </div>
+
+                }
+            }
+            <h1>Thank you, @Model.Name!</h1>
+            @if (Model.WillAttend == true)
+            {
+                @:It's great that you're coming.The drinks are already in the fridge!
         }
-        catch
-        {
-            @:<b>Sorry 无法发送邮件</b>
+            else
+            {
+                @:Sorry to hear that you can't make it,but thanks for letting us know.
         }
-    }
-    <div>
-        <h1>Thank you, @Model.Name!</h1>
-        @if (Model.WillAttend == true)
-        {
-            @:It's great that you're coming.The drinks are already in the fridge!
-        }
-        else
-        {
-            @:Sorry to hear that you can't make it,but thanks for letting us know.
-        }
-    	<hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Email)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Email)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Phone)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Phone)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.WillAttend)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.WillAttend)
-            </dd>
-    
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Phone)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.WillAttend)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.WillAttend)
+                </dd>
+
+            </dl>
+            <ul class="nav nav-pills">
+                <li class="active">
+                    @Html.ActionLink("Back to List", "Index")
+                </li>
+
+                <li class="disabled">
+                    @Html.ActionLink("Edit", "", new { /* id = Model.PrimaryKey */ }, new { @class = "disabled" })
+                </li>
+
+            </ul>
+        </div>
+        </div>
+
+        <!-- basic scripts -->
+        <!--[if !IE]> -->
+
+        <script src="~/Content/js/jquery-2.0.3.min.js"></script>
+
+        <!-- <![endif]-->
+        <!--[if IE]>
+        <script src="~/Content/js/jquery-1.10.2.min.js"></script>
+        <![endif]-->
+        <!--[if !IE]> -->
+
+        <script type="text/javascript">
+            window.jQuery || document.write("<script src='~/Content/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+        </script>
+
+        <!-- <![endif]-->
+        <!--[if IE]>
+        <script type="text/javascript">
+         window.jQuery || document.write("<script src='~/Content/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+        </script>
+        <![endif]-->
+        <script type="text/javascript">
+            if ("ontouchend" in document) document.write("<script src='~/Content/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+        </script>
+        <script src="~/Content/js/bootstrap.min.js"></script>
+        <script src="~/Content/js/typeahead-bs2.min.js"></script>
+
+        <!-- page specific plugin scripts -->
+        <!--[if lte IE 8]>
+          <script src="~/Content/js/excanvas.min.js"></script>
+        <![endif]-->
+
+        <script src="~/Content/js/jquery-ui-1.10.3.custom.min.js"></script>
+        <script src="~/Content/js/jquery.ui.touch-punch.min.js"></script>
+        <script src="~/Content/js/chosen.jquery.min.js"></script>
+        <script src="~/Content/js/fuelux/fuelux.spinner.min.js"></script>
+        <script src="~/Content/js/jquery.knob.min.js"></script>
+        <script src="~/Content/js/jquery.autosize.min.js"></script>
+        <script src="~/Content/js/jquery.inputlimiter.1.3.1.min.js"></script>
+        <script src="~/Content/js/jquery.maskedinput.min.js"></script>
+        <script src="~/Content/js/bootstrap-tag.min.js"></script>
+
+        <!-- ace scripts -->
+
+        <script src="~/Content/js/ace-elements.min.js"></script>
+        <script src="~/Content/js/ace.min.js"></script>
 </body>
 </html>
