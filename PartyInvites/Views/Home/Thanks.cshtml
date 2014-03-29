@@ -1,51 +1,9 @@
 ﻿@model PartyInvites.Models.GuestResponse
 
 @{
-    Layout = null;
+    Layout = "~/Views/_BasicLayout.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>@ViewBag.title</title>
-
-    <meta name="description" content="RsvpForm" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- basic styles -->
-    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
-
-    <!--[if IE 7]>
-      <link href="~/Content/css/font-awesome-ie7.min.css" rel="stylesheet" />
-    <![endif]-->
-    <!-- page specific plugin styles -->
-    <!-- fonts -->
-
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
-
-    <!-- ace styles -->
-    <link href="~/Content/css/ace.min.css" rel="stylesheet" />
-    <link href="~/Content/css/ace-rtl.min.css" rel="stylesheet" />
-    <link href="~/Content/css/ace-skins.min.css" rel="stylesheet" />
-    <!--[if lte IE 8]>
-      <link href="~/Content/css/ace-ie.min.css" rel="stylesheet" />
-    <![endif]-->
-    <!-- inline styles related to this page -->
-    <link href="~/Content/css/Site.css" rel="stylesheet" />
-    <!-- ace settings handler -->
-
-    <script src="~/Content/js/ace-extra.min.js"></script>
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="~/Content/js/html5shiv.js"></script>
-    <script src="~/Content/js/respond.min.js"></script>
-    <![endif]-->
-</head>
-<body>
     <div class="main-container" id="main-container">
         <script type="text/javascript">
             try { ace.settings.check('main-container', 'fixed') } catch (e) { }
@@ -181,5 +139,4 @@
 
         <script src="~/Content/js/ace-elements.min.js"></script>
         <script src="~/Content/js/ace.min.js"></script>
-</body>
-</html>
+
